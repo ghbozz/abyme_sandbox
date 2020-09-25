@@ -27,3 +27,11 @@ body {
 .full-height-wrapper {
 	min-height: calc(100vh - 80px);
 }
+
+.bg-smoke-light {
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal {
+	transition: opacity 0.1s ease-out;
+}
