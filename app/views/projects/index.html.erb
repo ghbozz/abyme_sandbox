@@ -1,0 +1,16 @@
+<div class="full-height-wrapper p-8">
+	<div class="container mx-auto bg-white p-8" data-controller="projects">
+	  <div class="projects-header flex items-center justify-between">
+	  	<h1 class="text-5xl">My Projects</h1>
+	  	<span id="new-project-modal-toggle"
+	  				data-action="click->projects#openModal" 
+	  				class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">
+	  			New Project
+	  	</span>
+	  </div>
+	  <div class="fixed pin z-50 overflow-auto bg-smoke-light flex" 
+	  		 data-target="projects.modal">
+	  	
+	  </div>
+	</div>
+</div>
