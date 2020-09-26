@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-  	@projects = Project.all
+  	@projects = current_user.projects
   	@project = Project.new
   end
 
@@ -12,6 +12,11 @@ class ProjectsController < ApplicationController
   	else
   		broadcast_errors @project, project_params
   	end
+  end
+
+  def destroy
+    Project.find(params[:id]).destroy
+    redirect_to projects_path
   end
 
   private

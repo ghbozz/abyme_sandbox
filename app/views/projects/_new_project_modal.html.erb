@@ -8,7 +8,7 @@
 									 data-action="click->projects#closeModal"
 									 style="top: 15px; right: 15px;">x</span>
 
-			<h3 class="text-3xl text-center mb-4">New Project</h3>
+			<h3 class="text-3xl text-center mb-4 font-bold">New Project</h3>
 			<%= simple_form_for project, remote: true do |f| %>
 				<%= f.container_for :title, class: 'field mb-4' do %>
 					<%= f.label :title, class: 'block text-gray-700 text-sm font-bold mb-2' %>
@@ -32,7 +32,7 @@
 					<%= f.error_for :description, class: 'text-red-700 error-feedback' %>
 				<% end %>		
 
-				<%= f.submit 'Create', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer' %>
+				<%= f.submit 'Create', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer' %>
 			<% end %>
 		</div>
  </div>

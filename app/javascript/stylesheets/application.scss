@@ -1,3 +1,19 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.main-color {
+	@apply .bg-indigo-500;
+}
+
+.main-color-hover {
+	@apply .bg-indigo-700;
+}
+
+.main-btn {
+	@apply .main-color;
+}
+
+.main-btn:hover {
+	@apply .main-color-hover;
+}
