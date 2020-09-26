@@ -6,33 +6,11 @@
 		<div class="modal-content relative w-1/4 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
 			<span class="cursor-pointer absolute" 
 									 data-action="click->projects#closeModal"
-									 style="top: 15px; right: 15px;">x</span>
+									 style="top: 15px; right: 15px;">
+				<i class="fas fa-times"></i>
+			</span>
 
 			<h3 class="text-3xl text-center mb-4 font-bold">New Project</h3>
-			<%= simple_form_for project, remote: true do |f| %>
-				<%= f.container_for :title, class: 'field mb-4' do %>
-					<%= f.label :title, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-					<%= f.input :title, label: false, 
-											input_html: { class: 'shadow appearance-none border 
-																						rounded w-full py-2 px-3
-																						text-gray-700 leading-tight
-																						focus:outline-none focus:shadow-outline
-																						mb-1' } %>
-					<%= f.error_for :title, class: 'text-red-700 error-feedback' %>
-				<% end %>
-				
-				<%= f.container_for :description, class: 'field mb-4' do %>
-					<%= f.label :description, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-					<%= f.input :description, label: false, 
-											input_html: { class: 'shadow appearance-none border 
-																						rounded w-full py-2 px-3
-																						text-gray-700 leading-tight
-																						focus:outline-none focus:shadow-outline
-																						mb-1 h-32' } %>
-					<%= f.error_for :description, class: 'text-red-700 error-feedback' %>
-				<% end %>		
-
-				<%= f.submit 'Create', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer' %>
-			<% end %>
+			<%= render 'project_form', project: project %>
 		</div>
  </div>

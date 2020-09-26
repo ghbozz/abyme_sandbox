@@ -19,6 +19,11 @@ class ProjectsController < ApplicationController
     redirect_to projects_path
   end
 
+  def project_validation
+    @project = Project.new(project_params.merge(user: current_user))    
+    broadcast_errors @project, project_params
+  end
+
   private
 
   def project_params
