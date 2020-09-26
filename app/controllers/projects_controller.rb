@@ -4,14 +4,13 @@ class ProjectsController < ApplicationController
   	@project = Project.new
   end
 
+  def show
+    @project = Project.find(params[:id])
+  end
+
   def create
   	@project = Project.new(project_params.merge(user: current_user))
-
-  	if @project.save
-  		redirect_to projects_path
-  	else
-  		broadcast_errors @project, project_params
-  	end
+  	@project.save ? redirect_to(projects_path) : broadcast_errors(@project, project_params)
   end
 
   def destroy
@@ -27,6 +26,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-  	params.require(:project).permit(:title, :description)
+  	params.require(:project).permit(:title, :description, :thumbnail)
   end
 end

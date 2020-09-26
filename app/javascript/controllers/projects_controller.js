@@ -2,7 +2,7 @@ import { Controller } from 'stimulus';
 import Rails from '@rails/ujs';
 
 export default class extends Controller {
-	static targets = ['modal'];
+	static targets = ['modal', 'imagePreview'];
 
 	openModal() {
 		this.modalTarget.classList.remove('opacity-0', 'pointer-events-none');
@@ -21,6 +21,23 @@ export default class extends Controller {
 		element
 			.querySelectorAll('.error-feedback')
 			.forEach(item => (item.innerText = ''));
+	}
+
+	imageChange(event) {
+		event.target
+			.closest('.image-inputs')
+			.querySelector('input[type="file"]')
+			.click();
+	}
+
+	imagePreview(event) {
+		const reader = new FileReader();
+
+		reader.onload = e => {
+			this.imagePreviewTarget.src = e.target.result;
+		};
+
+		reader.readAsDataURL(event.target.files[0]);
 	}
 
 	validation(event) {
