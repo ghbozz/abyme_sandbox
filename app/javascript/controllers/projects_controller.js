@@ -41,6 +41,7 @@ export default class extends Controller {
 	}
 
 	validation(event) {
+		console.log(event);
 		const input = event.target;
 		const form = new FormData();
 		form.append(input.name, input.value);
