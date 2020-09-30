@@ -1,0 +1,4 @@
+<%= f.input :title, input_html: { class: 'form-input focus:outline-none focus:shadow-outline' } %>
+<%= f.input :description, input_html: { class: 'form-input focus:outline-none focus:shadow-outline' } %>
+<%= f.hidden_field :_destroy %>
+<small><%= link_to "Remove", "#", data: { action: "click->abyme#remove_association" } %></small>

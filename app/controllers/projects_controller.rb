@@ -8,6 +8,10 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def new
+    @project = Project.new
+  end
+
   def create
   	@project = Project.new(project_params.merge(user: current_user))
   	@project.save ? redirect_to(projects_path) : broadcast_errors(@project, project_params)
@@ -40,6 +44,9 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-  	params.require(:project).permit(:title, :description, :thumbnail)
+  	params.require(:project).permit(
+      :title, :description, :thumbnail,
+      tasks_attributes: [:id, :title, :description, :_destroy]
+    )
   end
 end
