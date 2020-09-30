@@ -13,8 +13,8 @@ class ProjectsController < ApplicationController
   end
 
   def create
-  	@project = Project.new(project_params.merge(user: current_user))
-  	@project.save ? redirect_to(projects_path) : broadcast_errors(@project, project_params)
+    @project = Project.new(project_params.merge(user: current_user))
+  	@project.save ? redirect_to(projects_path) : render(:new)
   end
 
   def edit

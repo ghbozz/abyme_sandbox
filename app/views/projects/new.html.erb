@@ -13,7 +13,7 @@
 			<% end %>
 
 			<%= f.container_for :title, class: 'field mb-4' do %>
-				<%= f.input :title, label: false, 
+				<%= f.input :title, label: false, placeholder: 'Title...',
 										input_html: { class: 'text-4xl font-bold mb-4 w-full',
 																	data: { action: 'keyup->projects#validation' } } %>
 
@@ -21,19 +21,20 @@
 			<% end %>
 
 			<%= f.container_for :description, class: 'field mb-4' do %>
-				<%= f.input :description, label: false,
+				<%= f.input :description, label: false, placeholder: 'Description...',
 										input_html: { class: 'w-full',
 																	data: { action: 'keyup->projects#validation' } } %>
 
 				<%= f.error_for :description, class: 'text-red-700 error-feedback' %>
 			<% end %>
 
-			<%= f.submit 'Save', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer' %>
+				<%= f.submit 'Save', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer' %>
 		</div>
 		<div class="container bg-white p-8 w-2/3 ml-3">
 			<%= abyme_container_for(:tasks) do %>
+				<%= abyme_add_association('Add Task', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer') %>
 				<%= abymize(f, Task.new) %>
-				<%= abyme_add_association('Add Task') %>
+				<%= abyme_records(f, :tasks) %>
 			<% end %>
 		</div>
 	</div>

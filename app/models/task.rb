@@ -3,4 +3,10 @@ class Task < ApplicationRecord
   has_many :comments, inverse_of: :task, dependent: :destroy
 
   accepts_nested_attributes_for :comments, reject_if: :all_blank, allow_destroy: true
+
+  validates :title, presence: true
+  validates :title, length: { in: 5..200 }
+  validates :description, presence: true
+  validates :description, length: { in: 30..500 }
 end
+
