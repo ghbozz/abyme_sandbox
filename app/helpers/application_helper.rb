@@ -26,8 +26,12 @@ module ApplicationHelper
     end
   end
 
-  def abyme_association(text, **options)
+  def abyme_add_association(text, **options)
     button_tag(text, { data: { action: 'click->abyme#add_association' } }.merge(options))
+  end
+
+  def abyme_remove_association(text, **options)
+    button_tag(text, { data: { action: 'click->abyme#remove_association' } }.merge(options))
   end
 
   def formatize(association)
