@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def abyme_records(form, associations)
-    form.fields_for associations do |f|
+    form.fields_for associations, form.object.send(associations).order(created_at: :desc) do |f|
       content_tag(:div, class: 'abyme--fields') do
         render("#{associations.to_s.singularize}_fields", f: f)
       end
