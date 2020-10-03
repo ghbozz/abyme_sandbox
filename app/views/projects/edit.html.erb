@@ -28,10 +28,10 @@
 				<%= f.error_for :description, class: 'text-red-700 error-feedback' %>
 			<% end %>
 
-				<%= f.submit 'Save', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer' %>
+			<%= f.submit 'Save', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer' %>
 		</div>
 		<div class="container bg-white p-8 w-2/3 ml-3">
-			<%= abyme_container_for(:tasks) do %>
+			<%= abyme_for(:tasks) do %>
 				<%= abyme_add_association('Add Task', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer') %>
 				<%= abymize(f, Task.new) %>
 				<%= abyme_records(f, :tasks) %>
@@ -39,3 +39,4 @@
 		</div>
 	</div>
 <% end %>
+

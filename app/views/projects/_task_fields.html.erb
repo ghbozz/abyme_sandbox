@@ -23,11 +23,11 @@
       <small><%= abyme_remove_association('Remove Task') %></small>
     </div>
     <div class="w-1/2 border-solid border-2 rounded border-gray-300">
-      <%= abyme_container_for(:comments) do %>
+      <%= abyme_for(:comments) do %>
         <div class="p-4">
-          <%= abyme_add_association('+') %>
 				  <%= abymize(f, Comment.new) %>
           <%= abyme_records(f, :comments) %>
+          <%= abyme_add_association('+') %>
         </div>
 			<% end %>
     </div>

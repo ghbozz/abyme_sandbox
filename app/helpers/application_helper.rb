@@ -20,7 +20,7 @@ module ApplicationHelper
     end
   end
 
-  def abyme_container_for(association, &block)
+  def abyme_for(association, &block)
     content_tag(:div, data: { controller: 'abyme' }) do
       capture(&block)
     end
