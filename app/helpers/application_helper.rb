@@ -12,8 +12,12 @@ module ApplicationHelper
     end
   end
 
-  def abyme_records(form, associations)
-    form.fields_for associations, form.object.send(associations) do |f|
+  def abyme_records(form, associations, options = {})
+    records = form.object.send(associations)
+    records = records.order(options[:order]) if options[:order]
+    records = records.send(options[:scope]) if options[:scope]
+
+    form.fields_for associations, records do |f|
       content_tag(:div, class: 'abyme--fields') do
         render("#{associations.to_s.singularize}_fields", f: f)
       end

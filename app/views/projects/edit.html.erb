@@ -1,7 +1,6 @@
-<%= simple_form_for @project, remote: true do |f| %>
+<%= simple_form_for @project do |f| %>
 	<div class="full-height-wrapper p-8 text-gray-800 flex" data-controller="projects">
-		<div class="container bg-white p-8 w-1/3 mr-3 relative">
-			
+		<div class="container bg-white p-8 w-1/3 mr-3 relative">	
 			<%= f.container_for :thumbnail, class: 'field mb-4 image-inputs' do %>
 				<img src="<%= url_for(@project.thumbnail) if @project.thumbnail.attached? %>" id="image-preview" 
 						 data-target="projects.imagePreview" data-action="click->projects#imageChange">
@@ -16,7 +15,7 @@
 				<%= f.input :title, label: false, placeholder: 'Title',
 										input_html: { class: 'text-4xl font-bold mb-4 w-full',
 																	data: { action: 'keyup->projects#validation' } } %>
-
+				
 				<%= f.error_for :title, class: 'text-red-700 error-feedback' %>
 			<% end %>
 
@@ -27,16 +26,15 @@
 
 				<%= f.error_for :description, class: 'text-red-700 error-feedback' %>
 			<% end %>
-
+			
 			<%= f.submit 'Save', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full cursor-pointer' %>
 		</div>
 		<div class="container bg-white p-8 w-2/3 ml-3">
 			<%= abyme_for(:tasks) do %>
 				<%= abyme_add_association('Add Task', class: 'main-btn text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer') %>
 				<%= abymize(f, Task.new) %>
-				<%= abyme_records(f, :tasks) %>
+				<%= abyme_records(f, :tasks, order: { created_at: :desc }) %>
 			<% end %>
 		</div>
 	</div>
 <% end %>
-
