@@ -23,8 +23,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-
-    if @project.update(project_params)
+     if @project.update(project_params)
       redirect_to edit_project_path(@project)
     else
       broadcast_errors @project, project_params

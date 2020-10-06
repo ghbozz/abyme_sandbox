@@ -12,20 +12,26 @@ module ApplicationHelper
     end
   end
 
-  def abyme_records(form, associations, options = {})
-    records = form.object.send(associations)
-    records = records.order(options[:order]) if options[:order]
-    records = records.send(options[:scope]) if options[:scope]
+  def abyme_records(form, association, options = {collection: [], order: {}})
+    if association.is_a?(Symbol) && options.blank?
+      records = form.object.send(association).order(created_at: :desc)
+    elsif association.is_a?(Symbol) && !options[:order].blank?
+      records = form.object.send(association).order(options[:order])
+    else
+      records = options[:collection]
+    end
+    # records = records.order(options[:order]) if options[:order]
+    # records = records.send(options[:scope]) if options[:scope]
 
-    form.fields_for associations, records do |f|
+    form.fields_for association, records do |f|
       content_tag(:div, class: 'abyme--fields') do
-        render("#{associations.to_s.singularize}_fields", f: f)
+        render("#{association.to_s.singularize}_fields", f: f)
       end
     end
   end
 
-  def abyme_for(association, &block)
-    content_tag(:div, data: { controller: 'abyme' }) do
+  def abyme_for(association, position = :after, &block)
+    content_tag(:div, data: { controller: 'abyme', abyme_position: position }) do
       capture(&block)
     end
   end

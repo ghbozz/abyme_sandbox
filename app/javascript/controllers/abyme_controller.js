@@ -7,6 +7,10 @@ export default class extends Controller {
     console.log('Abyme Connect');
   }
 
+  get position() {
+    return this.data.get('position') === 'before' ? 'beforeend' : 'afterbegin';
+  }
+
   add_association(event) {
     event.preventDefault();
 
@@ -15,7 +19,8 @@ export default class extends Controller {
       new Date().getTime()
     );
 
-    this.associationsTarget.insertAdjacentHTML('beforeend', content);
+    console.log(this.position);
+    this.associationsTarget.insertAdjacentHTML(this.position, content);
   }
 
   remove_association(event) {
