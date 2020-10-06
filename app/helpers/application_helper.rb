@@ -13,15 +13,22 @@ module ApplicationHelper
   end
 
   def abyme_records(form, association, options = {collection: [], order: {}})
-    if association.is_a?(Symbol) && options.blank?
+    
+    if association.is_a?(Symbol) && options[:collection].blank? && options[:order].blank?
       records = form.object.send(association).order(created_at: :desc)
     elsif association.is_a?(Symbol) && !options[:order].blank?
       records = form.object.send(association).order(options[:order])
     else
       records = options[:collection]
     end
-    # records = records.order(options[:order]) if options[:order]
-    # records = records.send(options[:scope]) if options[:scope]
+    
+    # GET INVALID RECORDS
+    # raise
+    not_persisted  = form.object.send(association).select { |item| item.id.nil? }
+
+    if not_persisted.any?
+     records = records.to_a.concat(form.object.send(association).select { |item| item.id.nil? })
+    end
 
     form.fields_for association, records do |f|
       content_tag(:div, class: 'abyme--fields') do
