@@ -12,23 +12,24 @@ module ApplicationHelper
     end
   end
 
-  def abyme_records(form, association, options = {collection: [], order: {}})
-    
-    if association.is_a?(Symbol) && options[:collection].blank? && options[:order].blank?
-      records = form.object.send(association).order(created_at: :desc)
-    elsif association.is_a?(Symbol) && !options[:order].blank?
-      records = form.object.send(association).order(options[:order])
-    else
+  def abyme_records(form, association, options = { order: {} })
+
+    if options[:collection]
       records = options[:collection]
+    else
+      records = form.object.send(association)
+    end
+
+    if options[:order].present?
+      records = records.order(options[:order])
     end
     
     # GET INVALID RECORDS
-    # raise
-    not_persisted  = form.object.send(association).select { |item| item.id.nil? }
-
-    if not_persisted.any?
-     records = records.to_a.concat(form.object.send(association).select { |item| item.id.nil? })
-    end
+    # invalids = form.object.send(association).reject(&:persisted?)
+    
+    # if invalids.any?
+    #   records = records.to_a.concat(invalids)
+    # end
 
     form.fields_for association, records do |f|
       content_tag(:div, class: 'abyme--fields') do

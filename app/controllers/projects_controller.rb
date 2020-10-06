@@ -1,11 +1,12 @@
 class ProjectsController < ApplicationController
+  before_action :set_project, only: %i(show edit update)
+
   def index
   	@projects = current_user.projects
   	@project = Project.new
   end
 
   def show
-    @project = Project.find(params[:id])
   end
 
   def new
@@ -18,15 +19,15 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
   end
 
   def update
-    @project = Project.find(params[:id])
-     if @project.update(project_params)
+    @project.update(project_params)
+    
+    if @project.valid?
       redirect_to edit_project_path(@project)
     else
-      broadcast_errors @project, project_params
+      render :edit
     end
   end
 
@@ -57,5 +58,9 @@ class ProjectsController < ApplicationController
         ]
       ]
     )
+  end
+
+  def set_project
+    @project = Project.find(params[:id])
   end
 end
