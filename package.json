@@ -1,5 +1,5 @@
 {
-  "name": "ror_sandbox",
+  "name": "abyme_sandbox",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
